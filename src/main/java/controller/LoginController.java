@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import aplication.Util;
 import dao.UsuarioDAO;
 import model.Usuario;
 
@@ -19,12 +20,16 @@ public class LoginController implements Serializable{
 	private Usuario usuario = new Usuario();
 	
 	public void entrar() {
-		//UsuarioDAO u = new UsuarioDAO();
-		//u.Login("sebas", "1234");
-		System.out.println("babtata");
+		UsuarioDAO u = new UsuarioDAO();
+		usuario.setSenha(Util.hash(usuario));
+		u.Login(usuario.getLogin(), usuario.getSenha());
+		Util.redirect("/Moecafe/faces/principal.xhtml");
 	}
 
 	public Usuario getUsuario() {
+		if(usuario == null) {
+			usuario = new Usuario();
+		}
 		return usuario;
 	}
 

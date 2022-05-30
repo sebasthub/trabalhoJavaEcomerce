@@ -2,11 +2,18 @@ package model;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Usuario {
 	private Integer id;
+	@NotEmpty
 	private String login;
+	@NotEmpty
 	private String senha;
+	@NotEmpty
 	private String cpf;
+	@NotNull
 	private TipoUsuario tipoDeUsuario;
 	
 	public Integer getId() {
@@ -39,10 +46,9 @@ public class Usuario {
 	public void setTipoDeUsuario(TipoUsuario tipoDeUsuario) {
 		this.tipoDeUsuario = tipoDeUsuario;
 	}
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(id, senha);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -53,8 +59,10 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(id, other.id) && Objects.equals(senha, other.senha);
 	}
+	
+	
 	
 	
 	
