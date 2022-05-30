@@ -10,35 +10,49 @@
 	<h:commandButton 
 				value="voltar"
 				actionListener="#{usuarioController.voltar}"
-			/><h1>.:Cadastro de Usuario:.</h1>
+			/><h1>.:Cadastro de Produtos:.</h1>
 	</h:form>
 	<h:form id="formPrincipal">
 		<h:messages id="messages"
 			infoStyle="color:green;"  
 			warnStyle="color:yellow;"  
 			errorStyle="color:red;" />
-		
-		<p style="background-color: yellow;">em caso de atualização a senha deve bater com a antiga</p>
+			
 		<h:panelGrid id="pgPrincipal" columns="2" >
 		
-			<h:outputLabel value="login: " />
-			<h:inputText id="itNome" value="#{usuarioController.usuario.login}" />
+			<h:outputLabel value="nome: " />
+			<h:inputText id="itNome" value="#{cafeController.cafe.nome}" />
 
 			
-			<h:outputLabel value="Senha:" />
-			<h:inputSecret value="#{usuarioController.usuario.senha}"/>
+			<h:outputLabel value="valor:" />
+			<h:inputText value="#{cafeController.cafe.valor}"/>
 			
-			<h:outputLabel value="Cpf:" />
-			<h:inputText value="#{usuarioController.usuario.cpf}"/>
+			<h:outputLabel value="local de produção:" />
+			<h:inputText value="#{cafeController.cafe.localDeProducao}"/>
 			
-			<h:outputLabel value="tipo Do usuario:" />
-			<h:selectOneMenu value="#{usuarioController.usuario.tipoDeUsuario}">
+			<h:outputLabel value="tipo:" />
+			<h:inputText value="#{cafeController.cafe.tipo}"/>
+			
+			
+			<h:outputLabel value="Intencidade:" />
+			<h:selectOneMenu value="#{cafeController.cafe.intencidade}">
 				<f:selectItem 
 					itemLabel="Selecione um Perfil ..."/>
 				<f:selectItems 
 					var="obj" 
-					value="#{usuarioController.listaTipoUsuario}" 
+					value="#{cafeController.listaIntencidade}" 
 					itemLabel="#{obj.label}"
+					itemValue="#{obj}"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="marca:" />
+			<h:selectOneMenu value="#{cafeController.cafe.fornecedor}">
+				<f:selectItem 
+					itemLabel="Selecione um Perfil ..."/>
+				<f:selectItems 
+					var="obj" 
+					value="#{cafeController.listaFornecedores}" 
+					itemLabel="#{obj.marca}"
 					itemValue="#{obj}"/>
 			</h:selectOneMenu>
 			
