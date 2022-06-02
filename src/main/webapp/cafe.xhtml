@@ -25,7 +25,9 @@
 
 			
 			<h:outputLabel value="valor:" />
-			<h:inputText value="#{cafeController.cafe.valor}"/>
+			<h:inputText value="#{cafeController.cafe.valor}">
+				<f:convertNumber type="number"></f:convertNumber>
+			</h:inputText>
 			
 			<h:outputLabel value="local de produção:" />
 			<h:inputText value="#{cafeController.cafe.localDeProducao}"/>
@@ -50,17 +52,17 @@
 				<f:selectItem 
 					itemLabel="Selecione um Perfil ..."/>
 				<f:selectItems 
-					var="obj" 
+					var="fornecedor" 
 					value="#{cafeController.listaFornecedores}" 
-					itemLabel="#{obj.marca}"
-					itemValue="#{obj}"/>
+					itemLabel="#{fornecedor.marca}"
+					itemValue="#{fornecedor}"/>
 			</h:selectOneMenu>
 			
 		</h:panelGrid>
 		<h:panelGrid columns="5" >
 		 	<h:commandButton 
 		 		value="criar"
-		 		actionListener="#{usuarioController.criar}"
+		 		actionListener="#{cafeController.criar}"
 		 	/>
 			<h:commandButton 
 				value="Limpar" 
@@ -77,7 +79,7 @@
 		</h:panelGrid>
 		<h:dataTable 
 			id="dataTable"
-			value="#{usuarioController.usuarios}"
+			value="#{cafeController.cafes}"
 			var="obj">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
@@ -85,23 +87,23 @@
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">Login</f:facet>
-				<h:outputLabel value="#{obj.login}"/>
+				<f:facet name="header">nome</f:facet>
+				<h:outputLabel value="#{obj.nome}"/>
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">Senha</f:facet>
-				<h:outputLabel value="******"/>
+				<f:facet name="header">tipo</f:facet>
+				<h:outputLabel value="#{obj.tipo}"/>
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">Cpf</f:facet>
-				<h:outputLabel value="#{obj.cpf}"/>
+				<f:facet name="header">intencidade</f:facet>
+				<h:outputLabel value="#{obj.intencidade.label}"/>
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">tipo de usuario</f:facet>
-				<h:outputLabel value="#{obj.tipoDeUsuario.label}"/>
+				<f:facet name="header">fornecedor</f:facet>
+				<h:outputLabel value="#{obj.fornecedor.marca}"/>
 			</h:column>
 			
 			<h:column>

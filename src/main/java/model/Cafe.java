@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Iterator;
 
 public class Cafe {
 	private Integer id;
@@ -24,10 +23,10 @@ public class Cafe {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public double getValor() {
+	public Double getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 	public String getTipo() {

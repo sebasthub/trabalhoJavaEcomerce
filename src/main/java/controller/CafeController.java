@@ -7,6 +7,8 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import aplication.Util;
+import dao.CafeDAO;
 import dao.FornecedorDAO;
 import model.Cafe;
 import model.Fornecedor;
@@ -23,6 +25,17 @@ public class CafeController implements Serializable{
 	private List<Fornecedor> listaFornecedores;
 	
 	
+	public void criar() {
+		CafeDAO d = new CafeDAO();
+		if (d.insert(cafe)) {
+			Util.addMessageInfo("produto adicionado");
+		}else {
+			Util.addMessageError("erro na inserção");
+		}
+	}
+	
+	
+	
 	public Cafe getCafe() {
 		if(cafe == null) {
 			cafe = new Cafe();
@@ -33,6 +46,13 @@ public class CafeController implements Serializable{
 		this.cafe = cafe;
 	}
 	public ArrayList<Cafe> getCafes() {
+		if(cafes == null) {
+			CafeDAO c = new CafeDAO();
+			cafes =  (ArrayList<Cafe>) c.getAll();
+			if(cafes == null) {
+				cafes = new ArrayList<Cafe>();
+			}
+		}
 		return cafes;
 	}
 	public void setCafes(ArrayList<Cafe> cafes) {

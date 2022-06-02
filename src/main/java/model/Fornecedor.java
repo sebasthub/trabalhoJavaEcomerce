@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Fornecedor {
 	private Integer id;
 	private String marca;
@@ -22,6 +24,22 @@ public class Fornecedor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		return Objects.equals(id, other.id);
+	}
+	
 	
 	
 }
