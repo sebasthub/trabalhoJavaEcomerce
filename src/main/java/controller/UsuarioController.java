@@ -8,6 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import aplication.Util;
+import aplication.UtilizadorFlash;
 import dao.UsuarioDAO;
 import model.TipoUsuario;
 import model.Usuario;
@@ -48,56 +49,24 @@ public class UsuarioController implements Serializable{
 		this.usuarios = usuarios;
 	}
 
-	public void criar() {
-		usuario.setSenha(Util.hash(usuario));
-		UsuarioDAO d = new UsuarioDAO();
-		if(d.insert(usuario)) {
-			Util.addMessageInfo("adicionado com sucesso");
-		}else {
-			Util.addMessageError("erro na inserção");
-		}
-		limpar();
-	}
 	
-	public void limpar() {
-		setUsuario(null);
-	}
-	
-	public void delete() {
-		UsuarioDAO u = new UsuarioDAO();
-		if(u.delete(getUsuario().getId())) {
-			Util.addMessageInfo("deletado com sucesso");
-		}else {
-			Util.addMessageError("error ao deletar");
-		}
-		limpar();
-	}
 	
 	public void editar(int id) {
 		UsuarioDAO u = new UsuarioDAO();
-		setUsuario(u.getById(id));
+		UtilizadorFlash<Usuario> flash = new UtilizadorFlash<Usuario>();
+		flash.inserir("usuario", u.getById(id));
+		Util.redirect("cadastroUsuario.xhtml");
+	}
+	
+	public void criar() {
+		Util.redirect("cadastroUsuario.xhtml");
 	}
 	
 	public void delete(int id) {
 		UsuarioDAO u = new UsuarioDAO();
 		u.delete(id);
-		limpar();
 	}
 	
-	public void update() {
-		UsuarioDAO u = new UsuarioDAO();
-		Usuario usuarioComparativo = u.getById(usuario.getId());
-		usuario.setSenha(Util.hash(usuario));
-		if(usuario.equals(usuarioComparativo)) {
-			if (u.update(usuario)) {
-				Util.addMessageInfo("atualizado com sucesso");
-			}else {
-				Util.addMessageError("erro ao atualizar");
-			}
-		}else {
-			Util.addMessageError("senha não confere");
-		}
-	}
 	
 	public void voltar() {
 		Util.redirect("/Moecafe/faces/principal.xhtml");

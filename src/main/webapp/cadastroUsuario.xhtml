@@ -1,0 +1,61 @@
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+				   xmlns:f="http://xmlns.jcp.org/jsf/core"
+				   xmlns:h="http://xmlns.jcp.org/jsf/html"
+				   xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+	<title>Cadastro de Usuario</title>
+</h:head>
+<h:body>
+	<h1>.:Cadastro de Usuario:.</h1>
+	<h:form id="formPrincipal">
+		<h:messages id="messages"
+			infoStyle="color:green;"  
+			warnStyle="color:yellow;"  
+			errorStyle="color:red;" />
+		
+		<p style="background-color: yellow;">em caso de atualização a senha deve bater com a antiga</p>
+		<h:panelGrid id="pgPrincipal" columns="2" >
+		
+			<h:outputLabel value="login: " />
+			<h:inputText id="itNome" value="#{cadastroUsuarioController.usuario.login}" />
+
+			
+			<h:outputLabel value="Senha:" />
+			<h:inputSecret value="#{cadastroUsuarioController.usuario.senha}"/>
+			
+			<h:outputLabel value="Cpf:" />
+			<h:inputText value="#{cadastroUsuarioController.usuario.cpf}"/>
+			
+			<h:outputLabel value="tipo Do usuario:" />
+			<h:selectOneMenu value="#{cadastroUsuarioController.usuario.tipoDeUsuario}">
+				<f:selectItem 
+					itemLabel="Selecione um Perfil ..."/>
+				<f:selectItems 
+					var="obj" 
+					value="#{cadastroUsuarioController.listaTipoUsuario}" 
+					itemLabel="#{obj.label}"
+					itemValue="#{obj}"/>
+			</h:selectOneMenu>
+			
+		</h:panelGrid>
+		<h:panelGrid columns="5" >
+		 	<h:commandButton 
+		 		value="criar"
+		 		actionListener="#{cadastroUsuarioController.criar}"
+		 	/>
+			<h:commandButton 
+				value="Limpar" 
+				actionListener="#{cadastroUsuarioController.limpar}"
+				><f:ajax  render="formPrincipal" /></h:commandButton>
+			<h:commandButton 
+				value="excluir" 
+				actionListener="#{cadastroUsuarioController.delete}"
+				><f:ajax  render="formPrincipal" /></h:commandButton>
+			<h:commandButton 
+				value="update"
+				actionListener="#{cadastroUsuarioController.update}"
+			/>
+		</h:panelGrid>
+		</h:form>
+</h:body>
+</html>

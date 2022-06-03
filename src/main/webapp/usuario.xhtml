@@ -17,50 +17,10 @@
 			infoStyle="color:green;"  
 			warnStyle="color:yellow;"  
 			errorStyle="color:red;" />
-		
-		<p style="background-color: yellow;">em caso de atualização a senha deve bater com a antiga</p>
-		<h:panelGrid id="pgPrincipal" columns="2" >
-		
-			<h:outputLabel value="login: " />
-			<h:inputText id="itNome" value="#{usuarioController.usuario.login}" />
-
-			
-			<h:outputLabel value="Senha:" />
-			<h:inputSecret value="#{usuarioController.usuario.senha}"/>
-			
-			<h:outputLabel value="Cpf:" />
-			<h:inputText value="#{usuarioController.usuario.cpf}"/>
-			
-			<h:outputLabel value="tipo Do usuario:" />
-			<h:selectOneMenu value="#{usuarioController.usuario.tipoDeUsuario}">
-				<f:selectItem 
-					itemLabel="Selecione um Perfil ..."/>
-				<f:selectItems 
-					var="obj" 
-					value="#{usuarioController.listaTipoUsuario}" 
-					itemLabel="#{obj.label}"
-					itemValue="#{obj}"/>
-			</h:selectOneMenu>
-			
-		</h:panelGrid>
-		<h:panelGrid columns="5" >
-		 	<h:commandButton 
+		<h:commandButton 
 		 		value="criar"
 		 		actionListener="#{usuarioController.criar}"
 		 	/>
-			<h:commandButton 
-				value="Limpar" 
-				actionListener="#{usuarioController.limpar}"
-				><f:ajax  render="formPrincipal" /></h:commandButton>
-			<h:commandButton 
-				value="excluir" 
-				actionListener="#{usuarioController.delete}"
-				><f:ajax  render="formPrincipal" /></h:commandButton>
-			<h:commandButton 
-				value="update"
-				actionListener="#{usuarioController.update}"
-			/>
-		</h:panelGrid>
 		<h:dataTable 
 			id="dataTable"
 			value="#{usuarioController.usuarios}"
