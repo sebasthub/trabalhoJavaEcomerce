@@ -8,6 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import aplication.Util;
+import aplication.UtilizadorFlash;
 import dao.CafeDAO;
 import dao.FornecedorDAO;
 import model.Cafe;
@@ -24,17 +25,27 @@ public class CafeController implements Serializable{
 	private ArrayList<Cafe> cafes;
 	private List<Fornecedor> listaFornecedores;
 	
-	
 	public void criar() {
-		CafeDAO d = new CafeDAO();
-		if (d.insert(cafe)) {
-			Util.addMessageInfo("produto adicionado");
+		Util.redirect("cadastroCafe.xhtml");
+
+	}
+
+	public void delete(int id) {
+		CafeDAO c = new CafeDAO();
+		if (c.delete(id)) {
+			Util.addMessageInfo("atualizado");
 		}else {
-			Util.addMessageError("erro na inserção");
+			Util.addMessageError("erro no update");
 		}
+
 	}
 	
-	
+	public void editar(int id) {
+		CafeDAO c = new CafeDAO();
+		UtilizadorFlash<Cafe> flash = new UtilizadorFlash<Cafe>();
+		flash.inserir("cafe", c.getById(id));
+		Util.redirect("cadastroCafe.xhtml");
+	}
 	
 	public Cafe getCafe() {
 		if(cafe == null) {

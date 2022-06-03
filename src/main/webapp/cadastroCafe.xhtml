@@ -1,0 +1,79 @@
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+				   xmlns:f="http://xmlns.jcp.org/jsf/core"
+				   xmlns:h="http://xmlns.jcp.org/jsf/html"
+				   xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+	<title>Cadastro de Produtos</title>
+</h:head>
+<h:body>
+	
+	<h1>.:Cadastro de Produtos:.</h1>
+	
+	<h:form id="formPrincipal">
+		<h:messages id="messages"
+			infoStyle="color:green;"  
+			warnStyle="color:yellow;"  
+			errorStyle="color:red;" />
+			
+		<h:panelGrid id="pgPrincipal" columns="2" >
+		
+			<h:outputLabel value="nome: " />
+			<h:inputText id="itNome" value="#{cadastroCafeController.cafe.nome}" />
+
+			
+			<h:outputLabel value="valor:" />
+			<h:inputText value="#{cadastroCafeController.cafe.valor}">
+				<f:convertNumber type="number"></f:convertNumber>
+			</h:inputText>
+			
+			<h:outputLabel value="local de produção:" />
+			<h:inputText value="#{cadastroCafeController.cafe.localDeProducao}"/>
+			
+			<h:outputLabel value="tipo:" />
+			<h:inputText value="#{cadastroCafeController.cafe.tipo}"/>
+			
+			
+			<h:outputLabel value="Intencidade:" />
+			<h:selectOneMenu value="#{cadastroCafeController.cafe.intencidade}">
+				<f:selectItem 
+					itemLabel="Selecione um Perfil ..."/>
+				<f:selectItems 
+					var="obj" 
+					value="#{cafeController.listaIntencidade}" 
+					itemLabel="#{obj.label}"
+					itemValue="#{obj}"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="marca:" />
+			<h:selectOneMenu value="#{cadastroCafeController.cafe.fornecedor}">
+				<f:selectItem 
+					itemLabel="Selecione um Perfil ..."/>
+				<f:selectItems 
+					var="fornecedor" 
+					value="#{cafeController.listaFornecedores}" 
+					itemLabel="#{fornecedor.marca}"
+					itemValue="#{fornecedor}"/>
+			</h:selectOneMenu>
+			
+		</h:panelGrid>
+		<h:panelGrid columns="5" >
+		 	<h:commandButton 
+		 		value="criar"
+		 		actionListener="#{cadastroCafeController.criar}"
+		 	/>
+			<h:commandButton 
+				value="Limpar" 
+				actionListener="#{cadastroCafeController.limpar}"
+				><f:ajax  render="formPrincipal" /></h:commandButton>
+			<h:commandButton 
+				value="excluir" 
+				actionListener="#{cadastroCafeController.delete}"
+				><f:ajax  render="formPrincipal" /></h:commandButton>
+			<h:commandButton 
+				value="update"
+				actionListener="#{cadastroCafeController.update}"
+			/>
+		</h:panelGrid>
+		</h:form>
+</h:body>
+</html>

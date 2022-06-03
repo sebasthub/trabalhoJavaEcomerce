@@ -3,7 +3,6 @@ package aplication;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
-import br.unitins.livros.model.Livro;
 
 public class UtilizadorFlash<T> {
 	public void inserir(String chave,T objeto) {

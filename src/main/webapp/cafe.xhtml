@@ -3,7 +3,7 @@
 				   xmlns:h="http://xmlns.jcp.org/jsf/html"
 				   xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
-	<title>Cadastro de Usuario</title>
+	<title>Cadastro de Produtos</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -17,66 +17,10 @@
 			infoStyle="color:green;"  
 			warnStyle="color:yellow;"  
 			errorStyle="color:red;" />
-			
-		<h:panelGrid id="pgPrincipal" columns="2" >
-		
-			<h:outputLabel value="nome: " />
-			<h:inputText id="itNome" value="#{cafeController.cafe.nome}" />
-
-			
-			<h:outputLabel value="valor:" />
-			<h:inputText value="#{cafeController.cafe.valor}">
-				<f:convertNumber type="number"></f:convertNumber>
-			</h:inputText>
-			
-			<h:outputLabel value="local de produção:" />
-			<h:inputText value="#{cafeController.cafe.localDeProducao}"/>
-			
-			<h:outputLabel value="tipo:" />
-			<h:inputText value="#{cafeController.cafe.tipo}"/>
-			
-			
-			<h:outputLabel value="Intencidade:" />
-			<h:selectOneMenu value="#{cafeController.cafe.intencidade}">
-				<f:selectItem 
-					itemLabel="Selecione um Perfil ..."/>
-				<f:selectItems 
-					var="obj" 
-					value="#{cafeController.listaIntencidade}" 
-					itemLabel="#{obj.label}"
-					itemValue="#{obj}"/>
-			</h:selectOneMenu>
-			
-			<h:outputLabel value="marca:" />
-			<h:selectOneMenu value="#{cafeController.cafe.fornecedor}">
-				<f:selectItem 
-					itemLabel="Selecione um Perfil ..."/>
-				<f:selectItems 
-					var="fornecedor" 
-					value="#{cafeController.listaFornecedores}" 
-					itemLabel="#{fornecedor.marca}"
-					itemValue="#{fornecedor}"/>
-			</h:selectOneMenu>
-			
-		</h:panelGrid>
-		<h:panelGrid columns="5" >
-		 	<h:commandButton 
-		 		value="criar"
+		<h:commandButton 
+		 		value="cadastrar cafes"
 		 		actionListener="#{cafeController.criar}"
 		 	/>
-			<h:commandButton 
-				value="Limpar" 
-				actionListener="#{usuarioController.limpar}"
-				><f:ajax  render="formPrincipal" /></h:commandButton>
-			<h:commandButton 
-				value="excluir" 
-				actionListener="#{usuarioController.delete}"
-				><f:ajax  render="formPrincipal" /></h:commandButton>
-			<h:commandButton 
-				value="update"
-				actionListener="#{usuarioController.update}"
-			/>
-		</h:panelGrid>
 		<h:dataTable 
 			id="dataTable"
 			value="#{cafeController.cafes}"
@@ -108,10 +52,10 @@
 			
 			<h:column>
 				<f:facet name="header">Ação</f:facet>
-				<h:commandButton value="Editar" actionListener="#{usuarioController.editar(obj.id)}">
+				<h:commandButton value="Editar" actionListener="#{cafeController.editar(obj.id)}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
-				<h:commandButton value="Excluir" actionListener="#{usuarioController.delete(obj.id)}">
+				<h:commandButton value="Excluir" actionListener="#{cafeController.delete(obj.id)}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:column>
