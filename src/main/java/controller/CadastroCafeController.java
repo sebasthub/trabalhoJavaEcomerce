@@ -1,18 +1,26 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import aplication.Util;
 import aplication.UtilizadorFlash;
 import dao.CafeDAO;
+import dao.FornecedorDAO;
 import model.Cafe;
+import model.Fornecedor;
+import model.Intencidade;
 
 @Named
 @RequestScoped
 public class CadastroCafeController {
 	
 	private Cafe cafe;
+	private List<Fornecedor> listaFornecedores;
+	
 	
 	private CadastroCafeController() {
 		UtilizadorFlash<Cafe> flash = new UtilizadorFlash<Cafe>();
@@ -61,5 +69,22 @@ public class CadastroCafeController {
 	}
 	public void setCafe(Cafe cafe) {
 		this.cafe = cafe;
+	}
+	
+	public List<Fornecedor> getListaFornecedores() {
+		if(listaFornecedores == null) {
+			FornecedorDAO f = new FornecedorDAO();
+			listaFornecedores = f.getAll();
+			if (listaFornecedores == null) {
+				listaFornecedores = new ArrayList<Fornecedor>();
+			}
+		}
+		return listaFornecedores;
+	}
+	public void setListaFornecedores(List<Fornecedor> listaFornecedores) {
+		this.listaFornecedores = listaFornecedores;
+	}
+	public Intencidade[] getListaIntencidade() {
+		return Intencidade.values();
 	}
 }

@@ -39,7 +39,7 @@
 					itemLabel="Selecione um Perfil ..."/>
 				<f:selectItems 
 					var="obj" 
-					value="#{cafeController.listaIntencidade}" 
+					value="#{cadastroCafeController.listaIntencidade}" 
 					itemLabel="#{obj.label}"
 					itemValue="#{obj}"/>
 			</h:selectOneMenu>
@@ -50,7 +50,7 @@
 					itemLabel="Selecione um Perfil ..."/>
 				<f:selectItems 
 					var="fornecedor" 
-					value="#{cafeController.listaFornecedores}" 
+					value="#{cadastroCafeController.listaFornecedores}" 
 					itemLabel="#{fornecedor.marca}"
 					itemValue="#{fornecedor}"/>
 			</h:selectOneMenu>

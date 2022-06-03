@@ -32,10 +32,6 @@ public class UsuarioController implements Serializable{
 		this.usuario = usuario;
 	}
 	
-	public TipoUsuario[] getListaTipoUsuario() {
-		return TipoUsuario.values();
-	}
-	
 	public ArrayList<Usuario> getUsuarios() {
 		UsuarioDAO u = new UsuarioDAO();
 		usuarios = (ArrayList<Usuario>) u.getAll();

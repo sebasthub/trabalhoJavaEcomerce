@@ -23,7 +23,6 @@ public class CafeController implements Serializable{
 	
 	private Cafe cafe;
 	private ArrayList<Cafe> cafes;
-	private List<Fornecedor> listaFornecedores;
 	
 	public void criar() {
 		Util.redirect("cadastroCafe.xhtml");
@@ -68,21 +67,5 @@ public class CafeController implements Serializable{
 	}
 	public void setCafes(ArrayList<Cafe> cafes) {
 		this.cafes = cafes;
-	}
-	public List<Fornecedor> getListaFornecedores() {
-		if(listaFornecedores == null) {
-			FornecedorDAO f = new FornecedorDAO();
-			listaFornecedores = f.getAll();
-			if (listaFornecedores == null) {
-				listaFornecedores = new ArrayList<Fornecedor>();
-			}
-		}
-		return listaFornecedores;
-	}
-	public void setListaFornecedores(List<Fornecedor> listaFornecedores) {
-		this.listaFornecedores = listaFornecedores;
-	}
-	public Intencidade[] getListaIntencidade() {
-		return Intencidade.values();
 	}
 }
