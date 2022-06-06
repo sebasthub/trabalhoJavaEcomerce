@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import aplication.Session;
 import aplication.Util;
 import dao.UsuarioDAO;
 import model.Usuario;
@@ -22,8 +23,14 @@ public class LoginController implements Serializable{
 	public void entrar() {
 		UsuarioDAO u = new UsuarioDAO();
 		usuario.setSenha(Util.hash(usuario));
-		u.Login(usuario.getLogin(), usuario.getSenha());
-		Util.redirect("/Moecafe/faces/principal.xhtml");
+		usuario = u.Login(usuario.getLogin(), usuario.getSenha());
+		if (usuario != null) {
+			Session.getInstance().set("login", usuario);
+			Util.redirect("principal.xhtml");
+		}else {
+			Util.addMessageError("usuario ou senha invalido");
+		}
+		
 	}
 
 	public Usuario getUsuario() {
