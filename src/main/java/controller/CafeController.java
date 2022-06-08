@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import aplication.Session;
 import aplication.Util;
 import aplication.UtilizadorFlash;
 import dao.CafeDAO;
@@ -15,6 +16,7 @@ import model.Cafe;
 import model.Fornecedor;
 import model.Intencidade;
 import model.TipoUsuario;
+import model.Usuario;
 
 @Named
 @ViewScoped
@@ -23,6 +25,7 @@ public class CafeController implements Serializable{
 	
 	private Cafe cafe;
 	private ArrayList<Cafe> cafes;
+	private Usuario usuario;
 	
 	public void criar() {
 		Util.redirect("cadastroCafe.xhtml");
@@ -68,4 +71,17 @@ public class CafeController implements Serializable{
 	public void setCafes(ArrayList<Cafe> cafes) {
 		this.cafes = cafes;
 	}
+
+	public Usuario getUsuario() {
+		if (usuario == null) {
+			usuario = (Usuario) Session.getInstance().get("login");
+		}
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 }

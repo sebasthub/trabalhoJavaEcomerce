@@ -1,16 +1,51 @@
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 				   xmlns:f="http://xmlns.jcp.org/jsf/core"
-				   xmlns:h="http://xmlns.jcp.org/jsf/html">
+				   xmlns:h="http://xmlns.jcp.org/jsf/html"
+				   xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Pagina principal</title>
+		<h:outputStylesheet name="css/reset.css"/>
+		<h:outputStylesheet name="css/style.css"/>
 </h:head>
 <h:body>
-	<h1>Pagina principal</h1>
-	<h:form rendered="#{principalController.usuario != null}">
-		<h2><h:outputLabel value="#{principalController.usuario.login}"/></h2>
-	</h:form>
-	<h:form rendered="#{principalController.usuario.id == null}">
-		<a href="usuario.xhtml">cadastro</a>
-	</h:form>
+	<header class="menu">
+		<h:graphicImage library="images" name="menu.png" onclick="coisa()" />
+   		<div class="titulo">
+        	<h1>MoeCafe</h1>
+    	</div>
+    	<h:form rendered="#{principalController.usuario.id != null}">
+    		<h:commandButton image="resources/images/account.png" value="" actionListener="#{principalController.conta}" />
+    	</h:form>
+    	<h:form rendered="#{principalController.usuario.id == null}">
+    		<h:commandButton image="resources/images/login.png" value="" action="login.xhtml?faces-redirect=true" />
+    	</h:form>
+    </header>
+   	<main class="main">
+   	<div class="space">space</div>
+   	<div class="menu-interno">
+   		<ui:insert name="menu">
+   		<h:form rendered="#{principalController.admin}">
+   		<h2>Bem vindo, <h:outputLabel value="#{principalController.usuario.login}"/></h2>
+		<h:commandButton 
+			class="butao-interno"
+			style="width: 90%; text-align: center;"
+			value="cadastrar cafe"
+			action="cafe.xhtml?faces-redirect=true"
+			/>
+		<h:commandButton 
+			class="butao-interno"
+			style="width: 90%; text-align: center;"
+			value="cadastrar usuario"
+			action="usuario.xhtml?faces-redirect=true"
+			/>
+		</h:form>
+		</ui:insert>
+	</div>
+   	<div class="content">
+		<ui:insert name="conteudo">
+		</ui:insert>
+	</div>
+   	</main>
+   	<h:outputScript name="script.js" library="js"/>
 </h:body>
 </html>
