@@ -1,5 +1,4 @@
 let exist = true;
-let existUser = true;
 const menu = document.querySelector('.menu-interno');
 function coisa() {
     if (exist === false) {
@@ -16,13 +15,6 @@ function coisa() {
     
 }
 
-function usuario() {
-    const menuUsuario = document.querySelector('.menu-usuario')
-    if (existUser === false) {
-        menuUsuario.style.left = '-95%';
-        existUser = true;
-    }else {
-        menuUsuario.style.left = '71%';
-        existUser = false;
-    }
+function volta(){
+    history.back();
 }
