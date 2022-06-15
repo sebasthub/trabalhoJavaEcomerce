@@ -87,7 +87,7 @@ p {
 .buttonDiv {
     display: flex;
     flex-direction: row-reverse;
-    width: 63%;
+    width: 40rem;
 }
 
 .menu-interno {

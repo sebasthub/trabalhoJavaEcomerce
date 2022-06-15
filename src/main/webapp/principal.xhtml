@@ -6,6 +6,7 @@
 	<title>Pagina principal</title>
 		<h:outputStylesheet name="css/reset.css"/>
 		<h:outputStylesheet name="css/style.css"/>
+		<h:outputStylesheet name="tabela.css" library="css"/>
 </h:head>
 <h:body>
 	<header class="menu">
@@ -43,6 +44,30 @@
 	</div>
    	<div class="content">
 		<ui:insert name="conteudo">
+			<h:dataTable 
+				id="dataTable"
+				value="#{principalController.produtos}"
+				var="obj">
+				<h:column style = "width: 90px;">
+				<div class="card">
+            	<div class="primeiro">
+              	<img src="imagens/images.png"/> 
+              	<div class="texto">
+                <h2><h:outputLabel value="#{obj.nome}"/></h2>
+                <p> <h:outputLabel value="#{obj.tipo}" /> </p>
+              	</div>
+            	</div>
+            	<div class="meio">
+            	</div>
+            	<div class="fim">
+              	<h3>Preço: <span class="texto-fim">R$ <h:outputLabel value="#{obj.valor}"/> </span></h3>
+              	<div class="buttonDiv">
+                <h:button value="adicionar ao pedido" class="butao-interno"/>
+              	</div>
+            	</div>
+          		</div>
+				</h:column>
+			</h:dataTable>
 		</ui:insert>
 	</div>
    	</main>

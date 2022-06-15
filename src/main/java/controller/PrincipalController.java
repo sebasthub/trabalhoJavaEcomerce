@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -8,6 +9,8 @@ import javax.inject.Named;
 import aplication.Session;
 import aplication.Util;
 import aplication.UtilizadorFlash;
+import dao.CafeDAO;
+import model.Cafe;
 import model.TipoUsuario;
 import model.Usuario;
 
@@ -16,6 +19,8 @@ import model.Usuario;
 public class PrincipalController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
+	private ArrayList<Cafe> produtos;
+	private ArrayList<Cafe> carrinho;
 	private boolean admin;
 	
 	public PrincipalController() {
@@ -49,6 +54,27 @@ public class PrincipalController implements Serializable {
 		this.usuario = usuario;
 	}
 	
+	public ArrayList<Cafe> getProdutos() {
+		if (produtos  == null) {
+			CafeDAO c = new CafeDAO();
+			produtos = (ArrayList<Cafe>) c.getAll();
+			if (produtos  == null)  produtos = new ArrayList<Cafe>();
+		}
+		return produtos;
+	}
+
+	public void setProdutos(ArrayList<Cafe> produtos) {
+		this.produtos = produtos;
+	}
+
+	public ArrayList<Cafe> getCarrinho() {
+		return carrinho;
+	}
+
+	public void setCarrinho(ArrayList<Cafe> carrinho) {
+		this.carrinho = carrinho;
+	}
+
 	public boolean eAdmin() {
 		if (usuario.getTipoDeUsuario() == TipoUsuario.ADMINISTRADOR) {
 			return true;
