@@ -177,6 +177,7 @@ public class CafeDAO implements DAO<Cafe>{
 		sql.append("  nome, ");
 		sql.append("  tipo, ");
 		sql.append("  fornecedor, ");
+		sql.append("  image, ");
 		sql.append("  intencidade, ");
 		sql.append("  valor ");
 		sql.append("FROM ");
@@ -194,6 +195,7 @@ public class CafeDAO implements DAO<Cafe>{
 				cafe.setNome(rs.getString("nome"));
 				cafe.setTipo(rs.getString("tipo"));
 				cafe.setValor(rs.getDouble("valor"));
+				cafe.setImage(rs.getString("image"));
 				cafe.setIntencidade(Intencidade.valueOf(rs.getInt("intencidade")));
 				FornecedorDAO f = new FornecedorDAO();
 				cafe.setFornecedor(f.getById(rs.getInt("fornecedor")));
@@ -234,6 +236,7 @@ public class CafeDAO implements DAO<Cafe>{
 		sql.append("  tipo, ");
 		sql.append("  fornecedor, ");
 		sql.append("  intencidade, ");
+		sql.append("  image, ");
 		sql.append("  \"localDeProducao\" ");
 		sql.append("FROM ");
 		sql.append("  cafe ");
@@ -253,6 +256,7 @@ public class CafeDAO implements DAO<Cafe>{
 				cafe.setNome(rs.getString("nome"));
 				cafe.setValor(rs.getDouble("valor"));
 				cafe.setTipo(rs.getString("tipo"));
+				cafe.setImage(rs.getString("image"));
 				FornecedorDAO f = new FornecedorDAO();
 				cafe.setFornecedor(f.getById(rs.getInt("fornecedor")));
 				cafe.setIntencidade(Intencidade.valueOf(rs.getInt("intencidade")));

@@ -9,6 +9,7 @@ public class Cafe {
 	private String localDeProducao;
 	private Fornecedor fornecedor;
 	private Intencidade intencidade;
+	private String image;
 	
 	
 	public Integer getId() {
@@ -55,6 +56,15 @@ public class Cafe {
 	}
 	public void setIntencidade(Intencidade intencidade) {
 		this.intencidade = intencidade;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 	
 	

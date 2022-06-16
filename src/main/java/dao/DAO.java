@@ -18,7 +18,7 @@ public interface DAO<T> {
 
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/moeCafe", "ecomerce", "1234");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5433/moeCafe", "ecomerce", "1234");
 		} catch (SQLException e) {
 			System.out.println("Problema ao conectar no banco de dados. Verifique as informacoes de conexao.");
 			e.printStackTrace();

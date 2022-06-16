@@ -68,6 +68,9 @@ public class PrincipalController implements Serializable {
 	}
 
 	public ArrayList<Cafe> getCarrinho() {
+		if (carrinho == null) {
+			carrinho = new ArrayList<Cafe>();
+		}
 		return carrinho;
 	}
 
@@ -86,5 +89,11 @@ public class PrincipalController implements Serializable {
 		UtilizadorFlash<Usuario> flash = new UtilizadorFlash<Usuario>();
 		flash.inserir("usuario", usuario);
 		Util.redirect("cadastroUsuario.xhtml?faces-redirect=true");
+	}
+	
+	public void adicionar(int id) {
+		CafeDAO c = new CafeDAO();
+		getCarrinho().add(c.getById(id));
+		System.out.println(carrinho.toString());
 	}
 }

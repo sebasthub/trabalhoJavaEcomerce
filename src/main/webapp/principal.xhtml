@@ -6,7 +6,7 @@
 	<title>Pagina principal</title>
 		<h:outputStylesheet name="css/reset.css"/>
 		<h:outputStylesheet name="css/style.css"/>
-		<h:outputStylesheet name="tabela.css" library="css"/>
+		<h:outputStylesheet name="css/tabela.css"/>
 </h:head>
 <h:body>
 	<header class="menu">
@@ -57,12 +57,12 @@
                 <p> <h:outputLabel value="#{obj.tipo}" /> </p>
               	</div>
             	</div>
-            	<div class="meio">
+            	<div class="meio" style="background-image: url('#{obj.image}');">
             	</div>
             	<div class="fim">
               	<h3>Preço: <span class="texto-fim">R$ <h:outputLabel value="#{obj.valor}"/> </span></h3>
               	<div class="buttonDiv">
-                <h:button value="adicionar ao pedido" class="butao-interno"/>
+                <h:commandButton value="adicionar" class="butao-interno"  actionListener="#{principalController.adicionar(obj.id)}"/>
               	</div>
             	</div>
           		</div>

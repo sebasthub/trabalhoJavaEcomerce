@@ -66,6 +66,11 @@
 			</h:column>
 			
 			<h:column>
+				<f:facet name="header">image</f:facet>
+				<h:outputLabel value="#{obj.image}"/>
+			</h:column>
+			
+			<h:column>
 				<f:facet name="header">Ação</f:facet>
 				<h:commandButton value="Editar" actionListener="#{cafeController.editar(obj.id)}">
 					<f:ajax execute="@this" render="@form" />
