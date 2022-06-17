@@ -96,4 +96,9 @@ public class PrincipalController implements Serializable {
 		getCarrinho().add(c.getById(id));
 		System.out.println(carrinho.toString());
 	}
+	
+	public void irCarrinho() {
+		Session.getInstance().set("carrinho", getCarrinho());
+		Util.redirect("carrinho.xhtml");
+	}
 }

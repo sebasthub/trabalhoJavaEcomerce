@@ -40,6 +40,21 @@
 			action="usuario.xhtml?faces-redirect=true"
 			/>
 		</h:form>
+		<h:form rendered="#{!principalController.admin}">
+   		<h2>Bem vindo, <h:outputLabel value="#{principalController.usuario.login}"/></h2>
+		<h:commandButton 
+			class="butao-interno"
+			style="width: 90%; text-align: center;"
+			value="carrinho"
+			actionListener="#{principalController.irCarrinho}"
+			/>
+		<h:commandButton 
+			class="butao-interno"
+			style="width: 90%; text-align: center;"
+			value="historico de compras"
+			action="usuario.xhtml?faces-redirect=true"
+			/>
+		</h:form>
 		</ui:insert>
 	</div>
    	<div class="content">
