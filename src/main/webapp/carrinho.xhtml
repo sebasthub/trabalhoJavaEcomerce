@@ -36,11 +36,25 @@
 			</h:column>
 			
 			<h:column>
+			<f:facet name="header">qtd</f:facet>
+			<h:panelGrid columns="3">
+				<h:commandButton value="-" actionListener="#{carrinhoControler.menosUm(obj)}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+				<h:outputLabel value="#{obj.quant}"/>
+				<h:commandButton value="+" actionListener="#{carrinhoControler.maisUm(obj)}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:panelGrid>
+			</h:column>
+			
+			<h:column>
 				<h:commandButton value="Excluir" actionListener="#{carrinhoControler.delete(obj)}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:column>
 		</h:dataTable>
+		<h:commandButton value="comprar" actionListener="#{carrinhoControler.comprar}"/>
 	</h:form>
 	</ui:define>
 	</ui:composition>

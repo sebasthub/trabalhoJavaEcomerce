@@ -78,7 +78,9 @@
             	<div class="fim">
               	<h3>Preço: <span class="texto-fim">R$ <h:outputLabel value="#{obj.valor}"/> </span></h3>
               	<div class="buttonDiv">
-                <h:commandButton value="adicionar" class="butao-interno"  actionListener="#{principalController.adicionar(obj.id)}"/>
+                <h:commandButton value="adicionar" class="butao-interno"  actionListener="#{principalController.adicionar(obj.id)}">
+                	<f:ajax execute="@this" render="" />
+                </h:commandButton>
               	</div>
             	</div>
           		</div>

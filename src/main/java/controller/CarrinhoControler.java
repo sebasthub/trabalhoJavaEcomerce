@@ -8,9 +8,11 @@ import javax.inject.Named;
 
 import aplication.Session;
 import aplication.Util;
+import dao.vendaDAO;
 import model.Cafe;
 import model.ItemVenda;
 import model.Usuario;
+import model.Venda;
 
 @Named
 @ViewScoped
@@ -43,5 +45,27 @@ public class CarrinhoControler implements Serializable{
 	}
 	public void delete( ItemVenda item ) {
 		carrinho.remove(item);
+	}
+	
+	public void maisUm(ItemVenda i) {
+		i.setQuant(i.getQuant() + 1);
+	}
+	
+	public void menosUm(ItemVenda i) {
+		if(i.getQuant() > 1) i.setQuant(i.getQuant() - 1);
+	}
+	
+	public void comprar() {
+		Venda v = new Venda(valorTotal(carrinho), carrinho);
+		vendaDAO d = new vendaDAO();
+		d.insert(v);
+	}
+	
+	public double valorTotal(ArrayList<ItemVenda> carrinho) {
+		double total = 0;
+		for(int i = 0; i < carrinho.size(); i++) {
+			total = total + (carrinho.get(i).getValor()*carrinho.get(i).getQuant());
+		}
+		return total;
 	}
 }

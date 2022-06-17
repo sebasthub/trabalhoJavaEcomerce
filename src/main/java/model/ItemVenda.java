@@ -8,13 +8,15 @@ public class ItemVenda {
 	private int quant;
 	private double valor;
 	
-	ItemVenda(){	
+	ItemVenda(){
+		this.quant = 1;
 	}
 	
 	public ItemVenda(Cafe cafe, double valor) {
 		super();
 		this.cafe = cafe;
 		this.valor = valor;
+		this.quant = 1;
 	}
 
 

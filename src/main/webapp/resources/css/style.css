@@ -93,7 +93,7 @@ p {
 }
 
 .menu-interno {
-    position: absolute;
+    position: fixed;
     background-color: #FFF5D0;
     display: flex;
     flex-direction: column;
