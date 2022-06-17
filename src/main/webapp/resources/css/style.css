@@ -54,7 +54,8 @@ body {
 .meio {
     background-image: url('imagens/coxinha.webp');
     background-size: cover;
-    padding: 7rem;
+    background-position: center;
+    padding: 8rem;
     background-repeat: no-repeat;
 }
 
@@ -156,6 +157,12 @@ p {
     top: 85%;
     left: 55%;
     font-family: 'Roboto', sans-serif;
+}
+
+.content{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 @keyframes menu-transicao {

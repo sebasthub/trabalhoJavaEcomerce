@@ -44,6 +44,7 @@
 	</div>
    	<div class="content">
 		<ui:insert name="conteudo">
+		<h:form>
 			<h:dataTable 
 				id="dataTable"
 				value="#{principalController.produtos}"
@@ -68,6 +69,7 @@
           		</div>
 				</h:column>
 			</h:dataTable>
+			</h:form>
 		</ui:insert>
 	</div>
    	</main>
