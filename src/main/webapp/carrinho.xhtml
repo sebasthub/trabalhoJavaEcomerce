@@ -9,47 +9,39 @@
 <h:body>
 <ui:composition  template="/volta.xhtml">
 	<div class="space">space</div>
-	<ui:define name="conteudo">3
-	<h:dataTable 
+	<ui:define name="conteudo">
+	<h:form>
+		<h:dataTable 
 			id="dataTable"
 			value="#{carrinhoControler.carrinho}"
 			var="obj">
 			<h:column>
-				<f:facet name="header">Id</f:facet>
-				<h:outputLabel value="#{obj.id}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">nome</f:facet>
-				<h:outputLabel value="#{obj.nome}"/>
+				<f:facet name="header">produto</f:facet>
+				<h:outputLabel value="#{obj.cafe.nome}"/>
 			</h:column>
 			
 			<h:column>
 				<f:facet name="header">tipo</f:facet>
-				<h:outputLabel value="#{obj.tipo}"/>
+				<h:outputLabel value="#{obj.cafe.tipo}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">marca</f:facet>
+				<h:outputLabel value="#{obj.cafe.fornecedor.marca}"/>
 			</h:column>
 			
 			<h:column>
 				<f:facet name="header">intencidade</f:facet>
-				<h:outputLabel value="#{obj.intencidade.label}"/>
+				<h:outputLabel value="#{obj.cafe.intencidade.label}"/>
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">fornecedor</f:facet>
-				<h:outputLabel value="#{obj.fornecedor.marca}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">image</f:facet>
-				<h:graphicImage value="#{obj.image}"/>
-			</h:column>
-			
-			<h:column>
-				<h:commandButton value="Excluir" actionListener="#{cafeController.delete(obj.id)}">
+				<h:commandButton value="Excluir" actionListener="#{carrinhoControler.delete(obj)}">
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:column>
 		</h:dataTable>
+	</h:form>
 	</ui:define>
 	</ui:composition>
 </h:body>

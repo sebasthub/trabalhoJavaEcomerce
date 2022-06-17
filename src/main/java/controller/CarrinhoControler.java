@@ -9,6 +9,7 @@ import javax.inject.Named;
 import aplication.Session;
 import aplication.Util;
 import model.Cafe;
+import model.ItemVenda;
 import model.Usuario;
 
 @Named
@@ -19,11 +20,11 @@ public class CarrinhoControler implements Serializable{
 	 */
 	private static final long serialVersionUID = 2619117591309905224L;
 	private Usuario usuario;
-	private ArrayList<Cafe> carrinho;
+	private ArrayList<ItemVenda> carrinho;
 	public CarrinhoControler() {
 		usuario = (Usuario) Session.getInstance().get("login");
 		if(usuario == null) Util.redirect("login.xhtml");
-		carrinho = (ArrayList<Cafe>) Session.getInstance().get("carrinho");
+		carrinho = (ArrayList<ItemVenda>) Session.getInstance().get("carrinho");
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -31,13 +32,16 @@ public class CarrinhoControler implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public ArrayList<Cafe> getCarrinho() {
+	public ArrayList<ItemVenda> getCarrinho() {
 		if (carrinho == null) {
-			carrinho = new ArrayList<Cafe>();
+			carrinho = new ArrayList<ItemVenda>();
 		}
 		return carrinho;
 	}
-	public void setCarrinho(ArrayList<Cafe> carrinho) {
+	public void setCarrinho(ArrayList<ItemVenda> carrinho) {
 		this.carrinho = carrinho;
+	}
+	public void delete( ItemVenda item ) {
+		carrinho.remove(item);
 	}
 }

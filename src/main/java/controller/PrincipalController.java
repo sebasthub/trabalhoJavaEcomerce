@@ -11,6 +11,7 @@ import aplication.Util;
 import aplication.UtilizadorFlash;
 import dao.CafeDAO;
 import model.Cafe;
+import model.ItemVenda;
 import model.TipoUsuario;
 import model.Usuario;
 
@@ -20,7 +21,7 @@ public class PrincipalController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private ArrayList<Cafe> produtos;
-	private ArrayList<Cafe> carrinho;
+	private ArrayList<ItemVenda> carrinho;
 	private boolean admin;
 	
 	public PrincipalController() {
@@ -67,14 +68,14 @@ public class PrincipalController implements Serializable {
 		this.produtos = produtos;
 	}
 
-	public ArrayList<Cafe> getCarrinho() {
+	public ArrayList<ItemVenda> getCarrinho() {
 		if (carrinho == null) {
-			carrinho = new ArrayList<Cafe>();
+			carrinho = new ArrayList<ItemVenda>();
 		}
 		return carrinho;
 	}
 
-	public void setCarrinho(ArrayList<Cafe> carrinho) {
+	public void setCarrinho(ArrayList<ItemVenda> carrinho) {
 		this.carrinho = carrinho;
 	}
 
@@ -93,7 +94,9 @@ public class PrincipalController implements Serializable {
 	
 	public void adicionar(int id) {
 		CafeDAO c = new CafeDAO();
-		getCarrinho().add(c.getById(id));
+		Cafe cafe =  c.getById(id);
+		ItemVenda i = new ItemVenda(cafe, cafe.getValor());
+		getCarrinho().add(i);
 		System.out.println(carrinho.toString());
 	}
 	
