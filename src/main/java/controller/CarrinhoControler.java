@@ -8,7 +8,8 @@ import javax.inject.Named;
 
 import aplication.Session;
 import aplication.Util;
-import dao.vendaDAO;
+import aplication.UtilizadorFlash;
+import dao.VendaDAO;
 import model.Cafe;
 import model.ItemVenda;
 import model.Usuario;
@@ -32,6 +33,9 @@ public class CarrinhoControler implements Serializable{
 		return usuario;
 	}
 	public void setUsuario(Usuario usuario) {
+		if (usuario == null) {
+			usuario = new Usuario();
+		}
 		this.usuario = usuario;
 	}
 	public ArrayList<ItemVenda> getCarrinho() {
@@ -56,9 +60,16 @@ public class CarrinhoControler implements Serializable{
 	}
 	
 	public void comprar() {
+		UtilizadorFlash<String> m = new UtilizadorFlash<String>();
 		Venda v = new Venda(valorTotal(carrinho), carrinho,usuario);
-		vendaDAO d = new vendaDAO();
-		d.insert(v);
+		VendaDAO d = new VendaDAO();
+		if (d.insert(v)) {
+			m.inserir("mensagem", "realizado com sucesso");
+		}else {
+			m.inserir("mensagem", "erro na compra");
+		}
+		m.inserir("mensagem", "");
+		Util.redirect("principal.xhtml");
 	}
 	
 	public double valorTotal(ArrayList<ItemVenda> carrinho) {

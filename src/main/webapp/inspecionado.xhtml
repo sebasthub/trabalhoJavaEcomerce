@@ -1,0 +1,48 @@
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+				   xmlns:f="http://xmlns.jcp.org/jsf/core"
+				   xmlns:h="http://xmlns.jcp.org/jsf/html"
+				   xmlns:jsf="http://xmlns.jcp.org/jsf"
+				xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>carrinho</title>
+</h:head>
+<h:body>
+<ui:composition  template="/volta.xhtml">
+	<div class="space">space</div>
+	<ui:define name="conteudo">
+	<h:outputStylesheet name="css/estiloTabela.css"/>
+	<h:form style="">
+		<h1 style="text-align: center; margin: 1rem;">|Historico de pedidos|</h1>
+		<h2>data: <h:outputLabel value="#{inspecionadoController.venda.data}"/></h2>
+		<h2>valor total: <h:outputLabel value="#{inspecionadoController.venda.valor}"/></h2>
+		<h:dataTable 
+			id="dataTable"
+			value="#{inspecionadoController.venda.produtos}"
+			var="obj">
+			
+			<h:column>
+				<f:facet name="header">nome</f:facet>
+				<h:outputLabel value="#{obj.cafe.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">tipo</f:facet>
+				<h:outputLabel value="#{obj.cafe.tipo}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">quantidade</f:facet>
+				<h:outputLabel value="#{obj.quant}"/>
+			</h:column>
+						
+			<h:column>
+				<f:facet name="header">valor</f:facet>
+				<h:outputLabel value="#{obj.valor}"/>
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

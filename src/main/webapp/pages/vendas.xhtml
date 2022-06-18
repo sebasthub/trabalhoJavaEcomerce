@@ -4,22 +4,24 @@
 				   xmlns:jsf="http://xmlns.jcp.org/jsf"
 				xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>carrinho</title>
+	<title>historico de compras</title>
 </h:head>
 <h:body>
 <ui:composition  template="/volta.xhtml">
 	<div class="space">space</div>
 	<ui:define name="conteudo">
+	<h:outputStylesheet name="css/estiloTabela.css"/>
 	<h:form>
+		<h:panelGrid columns="3">
+			<h:inputText value="#{vendasController.nome}">
+			</h:inputText><h:commandButton value="filtrar" actionListener="#{vendasController.filtrar}"/>
+			<h:commandButton value="X" actionListener="#{vendasController.removerFiltro}"/>
+		</h:panelGrid>
+		<h1 style="text-align: center; margin: 1rem;">|ultimas vendas|</h1>
 		<h:dataTable 
 			id="dataTable"
-			value="#{historicoController.vendas}"
+			value="#{vendasController.vendas}"
 			var="obj">
-			
-			<h:column>
-				<f:facet name="header">usuario</f:facet>
-				<h:outputLabel value="#{obj.usuario.login}"/>
-			</h:column>
 			
 			<h:column>
 				<f:facet name="header">data</f:facet>
@@ -30,9 +32,13 @@
 				<f:facet name="header">valor</f:facet>
 				<h:outputLabel value="#{obj.valor}"/>
 			</h:column>
-
+			<h:column>
+				<f:facet name="header">ação</f:facet>
+				<h:commandButton value="inspecionar" actionListener="#{historyController.inspecionar(obj)}">
+					<f:ajax execute="@this" render="@form" />
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
-		<h:commandButton value="comprar" actionListener="#{carrinhoControler.comprar}"/>
 	</h:form>
 	</ui:define>
 	</ui:composition>

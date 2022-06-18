@@ -10,12 +10,12 @@
 </h:head>
 <h:body>
 	<header class="menu">
-		<h:graphicImage library="images" name="menu.png" onclick="coisa()" />
+		<h:graphicImage library="images" name="menu.png" onclick="coisa()"/>
    		<div class="titulo">
         	<h1>MoeCafe</h1>
     	</div>
     	<h:form rendered="#{principalController.usuario.id != null}">
-    		<h:commandButton image="resources/images/account.png" value="" actionListener="#{principalController.conta}" />
+    		<h:commandButton image="resources/images/account.png" value="" actionListener="#{principalController.sair}" />
     	</h:form>
     	<h:form rendered="#{principalController.usuario.id == null}">
     		<h:commandButton image="resources/images/login.png" value="" action="login.xhtml?faces-redirect=true" />
@@ -27,17 +27,23 @@
    		<ui:insert name="menu">
    		<h:form rendered="#{principalController.admin}">
    		<h2>Bem vindo, <h:outputLabel value="#{principalController.usuario.login}"/></h2>
+   		<h:commandButton 
+			class="butao-interno"
+			style="width: 90%; text-align: center;"
+			value="vendas"
+			action="pages/vendas.xhtml"
+			/>
 		<h:commandButton 
 			class="butao-interno"
 			style="width: 90%; text-align: center;"
 			value="cadastrar cafe"
-			action="cafe.xhtml?faces-redirect=true"
+			action="pages/cafe.xhtml?faces-redirect=true"
 			/>
 		<h:commandButton 
 			class="butao-interno"
 			style="width: 90%; text-align: center;"
 			value="cadastrar usuario"
-			action="usuario.xhtml?faces-redirect=true"
+			action="pages/usuario.xhtml?faces-redirect=true"
 			/>
 		</h:form>
 		<h:form rendered="#{!principalController.admin}">
@@ -52,13 +58,17 @@
 			class="butao-interno"
 			style="width: 90%; text-align: center;"
 			value="historico de compras"
-			action="historico.xhtml?faces-redirect=true"
+			action="history.xhtml"
 			/>
 		</h:form>
 		</ui:insert>
 	</div>
    	<div class="content">
 		<ui:insert name="conteudo">
+		<h:messages id="messages"
+			infoStyle="color:green;"  
+			warnStyle="color:yellow;"  
+			errorStyle="color:red;" />
 		<h:form>
 			<h:dataTable 
 				id="dataTable"

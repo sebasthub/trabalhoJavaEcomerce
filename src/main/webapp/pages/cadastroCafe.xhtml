@@ -1,20 +1,24 @@
+
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 				   xmlns:f="http://xmlns.jcp.org/jsf/core"
 				   xmlns:h="http://xmlns.jcp.org/jsf/html"
-				   xmlns:jsf="http://xmlns.jcp.org/jsf">
+				   xmlns:jsf="http://xmlns.jcp.org/jsf"
+				xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Cadastro de Produtos</title>
+	<title>Cadastro de produtos</title>
 </h:head>
 <h:body>
-	
-	<h1>.:Cadastro de Produtos:.</h1>
+<ui:composition  template="/volta.xhtml">
+	<div class="space">space</div>
+	<ui:define name="conteudo">
+
 	
 	<h:form id="formPrincipal">
 		<h:messages id="messages"
 			infoStyle="color:green;"  
 			warnStyle="color:yellow;"  
 			errorStyle="color:red;" />
-			
+		<h1>.:Cadastro de Produtos:.</h1>
 		<h:panelGrid id="pgPrincipal" columns="2" >
 		
 			<h:outputLabel value="nome: " />
@@ -28,6 +32,9 @@
 			
 			<h:outputLabel value="local de produção:" />
 			<h:inputText value="#{cadastroCafeController.cafe.localDeProducao}"/>
+			
+			<h:outputLabel value="imagem:" />
+			<h:inputText value="#{cadastroCafeController.cafe.image}"/>
 			
 			<h:outputLabel value="tipo:" />
 			<h:inputText value="#{cadastroCafeController.cafe.tipo}"/>
@@ -75,5 +82,7 @@
 			/>
 		</h:panelGrid>
 		</h:form>
+		</ui:define>
+		</ui:composition>
 </h:body>
 </html>

@@ -8,7 +8,7 @@ public class ItemVenda {
 	private int quant;
 	private double valor;
 	
-	ItemVenda(){
+	public ItemVenda(){
 		this.quant = 1;
 	}
 	
@@ -30,7 +30,7 @@ public class ItemVenda {
 	public Cafe getCafe() {
 		return cafe;
 	}
-	public void setCafeId(Cafe cafe) {
+	public void setCafe(Cafe cafe) {
 		this.cafe = cafe;
 	}
 	public int getQuant() {

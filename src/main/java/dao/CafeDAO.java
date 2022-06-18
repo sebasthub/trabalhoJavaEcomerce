@@ -30,8 +30,10 @@ public class CafeDAO implements DAO<Cafe>{
 		sql.append("  tipo, ");
 		sql.append("  fornecedor, ");
 		sql.append("  intencidade, ");
+		sql.append("  image, ");
 		sql.append("  \"localDeProducao\" ");
 		sql.append(") VALUES ( ");
+		sql.append("  ?, ");
 		sql.append("  ?, ");
 		sql.append("  ?, ");
 		sql.append("  ?, ");
@@ -48,7 +50,8 @@ public class CafeDAO implements DAO<Cafe>{
 			stat.setString(3, obj.getTipo());
 			stat.setInt(4, obj.getFornecedor().getId());
 			stat.setInt(5, obj.getIntencidade().getId());
-			stat.setString(6, obj.getLocalDeProducao());
+			stat.setString(6, obj.getImage());
+			stat.setString(7, obj.getLocalDeProducao());
 			stat.execute();
 
 		} catch (SQLException e) {

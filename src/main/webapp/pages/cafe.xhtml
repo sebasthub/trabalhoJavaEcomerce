@@ -7,31 +7,15 @@
 	<title>Cadastro de Produtos</title>
 </h:head>
 <h:body>
-<ui:composition  template="/principal.xhtml">
-	<ui:define name="menu">
-		<h2>Bem vindo: <h:outputLabel value="#{cafeController.usuario.login}"/></h2>
-		<h:form>
-			<div style="width: 100%;">
-				<h:commandButton 
-					class="butao-interno"
-					value="voltar"
-					actionListener="#{usuarioController.voltar}"
-				/>
-			</div>
-		</h:form>
-	</ui:define>
+<ui:composition  template="/volta.xhtml">
 	<ui:define name="conteudo">
-	<h:form>
-	<h:commandButton 
-				value="voltar"
-				actionListener="#{usuarioController.voltar}"
-			/><h1>.:Cadastro de Produtos:.</h1>
-	</h:form>
+	<h:outputStylesheet name="css/estiloTabela.css"/>
 	<h:form id="formPrincipal">
 		<h:messages id="messages"
 			infoStyle="color:green;"  
 			warnStyle="color:yellow;"  
 			errorStyle="color:red;" />
+		<h1>.:Cadastro de Produtos:.</h1>
 		<h:commandButton 
 		 		value="cadastrar cafes"
 		 		actionListener="#{cafeController.criar}"
@@ -66,11 +50,6 @@
 			</h:column>
 			
 			<h:column>
-				<f:facet name="header">image</f:facet>
-				<h:outputLabel value="#{obj.image}"/>
-			</h:column>
-			
-			<h:column>
 				<f:facet name="header">Ação</f:facet>
 				<h:commandButton value="Editar" actionListener="#{cafeController.editar(obj.id)}">
 					<f:ajax execute="@this" render="@form" />
@@ -79,7 +58,6 @@
 					<f:ajax execute="@this" render="@form" />
 				</h:commandButton>
 			</h:column>
-		
 		</h:dataTable>
 		</h:form>
 	</ui:define>

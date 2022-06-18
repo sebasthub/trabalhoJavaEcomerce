@@ -32,6 +32,11 @@ public class LoginController implements Serializable{
 		}
 		
 	}
+	
+	public void limpar() {
+		usuario = null;
+
+	}
 
 	public Usuario getUsuario() {
 		if(usuario == null) {

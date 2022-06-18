@@ -313,4 +313,60 @@ public class UsuarioDAO implements DAO<Usuario>{
 		System.out.println("done");
 		return usuario;
 	}
+	
+	public Usuario getByNome(String s) {
+
+		Connection conn = DAO.getConnection();
+		if (conn == null) {
+			return null;
+		}
+
+		Usuario usuario = null;
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append("  u.id, ");
+		sql.append("  u.login, ");
+		sql.append("  u.senha, ");
+		sql.append("  u.cpf, ");
+		sql.append("  u.tipo_usuario ");
+		sql.append("FROM ");
+		sql.append("  usuario u ");
+		sql.append("WHERE ");
+		sql.append("  u.login = ? ");
+
+		ResultSet rs = null;
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setString(1, s);
+			
+			rs = stat.executeQuery();
+			if(rs == null) {
+				return null;
+			}
+			if (rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setCpf(rs.getString("cpf"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setTipoDeUsuario(TipoUsuario.valueOf(rs.getInt("tipo_usuario")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usuario;
+	}
 }

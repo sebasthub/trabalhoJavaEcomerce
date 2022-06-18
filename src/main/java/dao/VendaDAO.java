@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ import model.ItemVenda;
 import model.Usuario;
 import model.Venda;
 
-public class vendaDAO implements DAO<Venda>{
+public class VendaDAO implements DAO<Venda>{
 
 	@Override
 	public boolean insert(Venda obj) {
@@ -174,4 +172,108 @@ public class vendaDAO implements DAO<Venda>{
 		}
 		return lista;
 	}
+
+public Venda getByVenda(Venda venda) {
+	Connection conn = DAO.getConnection();
+	if (conn == null) {
+		return null;
+	}
+
+	venda.setProdutos(new ArrayList<ItemVenda>());
+	
+	StringBuffer sql = new StringBuffer();
+	sql.append("SELECT ");
+	sql.append("  i.id, ");
+	sql.append("  i.valor, ");
+	sql.append("  i.quant, ");
+	sql.append("  i.cafe_id ");
+	sql.append("FROM ");
+	sql.append("  item_venda i ");
+	sql.append("WHERE ");
+	sql.append("  i.venda_id = ? ");
+
+	ResultSet rs = null;
+	PreparedStatement stat = null;
+	try {
+		stat = conn.prepareStatement(sql.toString());
+		stat.setInt(1, venda.getId());
+
+		rs = stat.executeQuery();
+		CafeDAO dao = new CafeDAO();
+		while (rs.next()) {
+			ItemVenda item = new ItemVenda();
+			item.setId(rs.getInt("id"));
+			item.setValor(rs.getDouble("valor"));
+			item.setQuant(rs.getInt("quant"));
+			item.setCafe(dao.getById(rs.getInt("cafe_id")));
+			venda.getProdutos().add(item);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	try {
+		rs.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	try {
+		conn.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return venda;
+}
+
+public List<Venda> getByUltimas() {
+	Connection conn = DAO.getConnection();
+	if (conn == null) {
+		return null;
+	}
+
+	List<Venda> lista = new ArrayList<Venda>();
+
+	StringBuffer sql = new StringBuffer();
+	sql.append("SELECT ");
+	sql.append("  v.id, ");
+	sql.append("  v.valor, ");
+	sql.append("  v.data ");
+	sql.append("FROM ");
+	sql.append("  venda v ");
+	sql.append("ORDER BY ");
+	sql.append("  v.id DESC ");
+	sql.append("LIMIT 10 ");
+
+	ResultSet rs = null;
+	PreparedStatement stat = null;
+	try {
+		stat = conn.prepareStatement(sql.toString());
+
+		rs = stat.executeQuery();
+		while (rs.next()) {
+			Venda venda = new Venda();
+			venda.setId(rs.getInt("id"));
+			venda.setValor(rs.getDouble("valor"));
+			venda.setData(rs.getDate("data").toLocalDate());
+			
+			
+			lista.add(venda);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		lista = null;
+	}
+
+	try {
+		rs.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	try {
+		conn.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return lista;
+}
 }

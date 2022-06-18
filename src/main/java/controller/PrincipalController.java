@@ -30,7 +30,9 @@ public class PrincipalController implements Serializable {
 		}else {
 			admin = false;
 		}
-		
+		UtilizadorFlash<String> s = new UtilizadorFlash<String>();
+		String mensage = s.pegar("mensagem");
+		if(mensage != null) Util.addMessageInfo(mensage);
 	}
 	
 	public Usuario getUsuario() {
@@ -86,11 +88,6 @@ public class PrincipalController implements Serializable {
 		return false;
 	}
 	
-	public void conta() {
-		UtilizadorFlash<Usuario> flash = new UtilizadorFlash<Usuario>();
-		flash.inserir("usuario", usuario);
-		Util.redirect("cadastroUsuario.xhtml?faces-redirect=true");
-	}
 	
 	public void adicionar(int id) {
 		CafeDAO c = new CafeDAO();
@@ -103,5 +100,10 @@ public class PrincipalController implements Serializable {
 	public void irCarrinho() {
 		Session.getInstance().set("carrinho", getCarrinho());
 		Util.redirect("carrinho.xhtml");
+	}
+	
+	public void sair() {
+		Session.getInstance().set("login", null);
+		Util.redirect("#");
 	}
 }
