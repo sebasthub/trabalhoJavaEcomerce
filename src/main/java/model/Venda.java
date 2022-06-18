@@ -7,14 +7,16 @@ public class Venda {
 	Integer id;
 	LocalDate data;
 	double valor;
+	Usuario usuario;
 	ArrayList<ItemVenda> produtos;
 	
 	public Venda(){
 		this.data = LocalDate.now();
 	}
 	
-	public Venda(double valor, ArrayList<ItemVenda> produtos) {
+	public Venda(double valor, ArrayList<ItemVenda> produtos, Usuario usuario) {
 		super();
+		this.usuario = usuario;
 		this.data = LocalDate.now();
 		this.valor = valor;
 		this.produtos = produtos;
@@ -46,6 +48,14 @@ public class Venda {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

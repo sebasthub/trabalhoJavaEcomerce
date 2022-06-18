@@ -56,7 +56,7 @@ public class CarrinhoControler implements Serializable{
 	}
 	
 	public void comprar() {
-		Venda v = new Venda(valorTotal(carrinho), carrinho);
+		Venda v = new Venda(valorTotal(carrinho), carrinho,usuario);
 		vendaDAO d = new vendaDAO();
 		d.insert(v);
 	}

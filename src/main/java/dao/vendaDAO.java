@@ -6,9 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.ItemVenda;
+import model.Usuario;
 import model.Venda;
 
 public class vendaDAO implements DAO<Venda>{
@@ -31,8 +35,10 @@ public class vendaDAO implements DAO<Venda>{
 		StringBuffer sql = new StringBuffer();
 		sql.append("INSERT INTO venda ( ");
 		sql.append("  data, ");
+		sql.append("  usuario, ");
 		sql.append("  valor ");
 		sql.append(") VALUES ( ");
+		sql.append("  ?, ");
 		sql.append("  ?, ");
 		sql.append("  ? ");
 		sql.append(") ");
@@ -41,7 +47,8 @@ public class vendaDAO implements DAO<Venda>{
 		try {
 			stat = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			stat.setDate(1, Date.valueOf(obj.getData()));
-			stat.setDouble(2, obj.getValor());
+			stat.setInt(2,obj.getUsuario().getId());
+			stat.setDouble(3, obj.getValor());
 			stat.execute();
 			
 			ResultSet rs = stat.getGeneratedKeys();
@@ -111,8 +118,60 @@ public class vendaDAO implements DAO<Venda>{
 
 	@Override
 	public List<Venda> getAll() {
-		// TODO Auto-generated method stub
 		return null;
-	}
 
+	}
+	public List<Venda> getByUsuario(Usuario usuario) {
+		Connection conn = DAO.getConnection();
+		if (conn == null) {
+			return null;
+		}
+
+		List<Venda> lista = new ArrayList<Venda>();
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT ");
+		sql.append("  v.id, ");
+		sql.append("  v.valor, ");
+		sql.append("  v.data ");
+		sql.append("FROM ");
+		sql.append("  venda v ");
+		sql.append("WHERE ");
+		sql.append(" v.usuario = ? ");
+		sql.append("ORDER BY ");
+		sql.append("  v.data DESC ");
+
+		ResultSet rs = null;
+		PreparedStatement stat = null;
+		try {
+			stat = conn.prepareStatement(sql.toString());
+			stat.setInt(1, usuario.getId());
+
+			rs = stat.executeQuery();
+			while (rs.next()) {
+				Venda venda = new Venda();
+				venda.setId(rs.getInt("id"));
+				venda.setValor(rs.getDouble("valor"));
+				venda.setData(rs.getDate("data").toLocalDate());
+				
+				
+				lista.add(venda);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			lista = null;
+		}
+
+		try {
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
 }
